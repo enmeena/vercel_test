@@ -7,10 +7,10 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # Allows all origins
+    allow_origins=["*"],           # Required to fix your specific error
     allow_credentials=True,
-    allow_methods=["POST"], # Specifically allows POST as requested
-    allow_headers=["*"], # Allows all headers
+    allow_methods=["POST", "OPTIONS"], # Explicitly allow POST and preflight
+    allow_headers=["*"],           # Allows all headers (Content-Type, etc.)
 )
 
 # Load the data from your telemetry bundle
