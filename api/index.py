@@ -24,7 +24,7 @@ async def get_metrics(request: Request):
     regions = body.get("regions", [])
     threshold = body.get("threshold_ms", 180)
     
-    results = {}
+    results = {"regions": {}}
     for region in regions:
         # Filter records for the requested region
         region_recs = [d for d in TELEMETRY_DATA if d["region"] == region]
@@ -34,7 +34,7 @@ async def get_metrics(request: Request):
         latencies = [d["latency_ms"] for d in region_recs]
         uptimes = [d["uptime_pct"] for d in region_recs]
         
-        results[region] = {
+        results["regions"][region] = {
             "avg_latency": float(np.mean(latencies)),
             "p95_latency": float(np.percentile(latencies, 95)),
             "avg_uptime": float(np.mean(uptimes)),
