@@ -5,12 +5,12 @@ import json
 
 app = FastAPI()
 
-# Requirement: Enable CORS for POST requests from any origin
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["POST"],
-    allow_headers=["*"],
+    allow_origins=["*"], # Allows all origins
+    allow_credentials=True,
+    allow_methods=["POST"], # Specifically allows POST as requested
+    allow_headers=["*"], # Allows all headers
 )
 
 # Load the data from your telemetry bundle
